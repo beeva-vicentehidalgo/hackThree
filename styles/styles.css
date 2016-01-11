@@ -1,0 +1,20 @@
+@font-face {
+    font-family: bbvaweb;
+    src: url(fuentes/bbvaweb-light.ttf);
+}
+html,body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	width:100%;
+	height:100%;	
+  	font-family: bbvaweb;
+}
+
+.whiteBack {
+	background-color: #090909;
+    -webkit-transition: all ease-out 1.5s;
+    -moz-transition: all ease-out 1.5s;
+    -o-transition: all  ease-out 1.5s;
+    transition: all ease-out 1.5s;
+}
