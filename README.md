@@ -1,8 +1,8 @@
 # hackThree
 
-1. clonar repositorio
+#clonar repositorio
 
-git clone https://github.com/beeva-sergiosantamaria/hackThree.git
+  git clone https://github.com/beeva-sergiosantamaria/hackThree.git
 
 2. Abrir scene/main.js para editar
 
