@@ -52,8 +52,11 @@ function init() {
 
 }
 
+
 function buildShape(){
-	
+
+	// COPIA AQUI EL CODIGO DEL OBJETO PARA RENDERIZARLO EN ESCENA
+
 }
 
 function onWindowResize() {
@@ -62,62 +65,6 @@ function onWindowResize() {
 	camera.updateProjectionMatrix();
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
-}
-
-function addLinesRed(){
-	
-	var lineRedGroup = new THREE.Object3D();
-	var reScaleGroup = 1;
-
-	var firstPoint = {'x': 1000, 'y': 1000, 'z': 0};
-	var endPoint = {'x': 0, 'y': 1000, 'z': 0};
-	var count = 0;
-
-	var numPoints = 200;
-
-	var spline = new THREE.SplineCurve3([
-				   new THREE.Vector3(firstPoint.x ,firstPoint.y ,2 ),
-				   new THREE.Vector3(((firstPoint.x+endPoint.x)/2), (firstPoint.y+endPoint.y)/2, 30 ),
-				   new THREE.Vector3(endPoint.x ,endPoint.y ,2 )
-				]);
-
-	var geometry3 = new THREE.Geometry();
-
-	var material3 = new THREE.LineBasicMaterial({
-		    color: 0xff5500,
-		    transparent:true,
-			opacity: 0.8,
-		    //linewidth: Math.floor((Math.random() * 30) + 1)*10*e,
-            linewidth: 1,
-			sizeAttenuation: false,
-			visible: true
-		});
-
-	var splinePoints = spline.getPoints(numPoints);
-
-	for(var o = 0; o < splinePoints.length; o++){
-		    geometry3.vertices.push(splinePoints[o]);  
-		}	
-
-	var line2 = new THREE.Line(geometry3, material3);
-
-	lineRedGroup.add(line2);
-
-	lineRedGroup.scale.set(1,1,1);	
-
-	lineRedGroup.rotation.x = Math.PI / 2;
-	lineRedGroup.rotation.y = Math.PI;
-
-	scene.add(lineRedGroup);
-}
-
-function removeLines(){
-	if(lineRedGroup.children.length > 0){
-		for( var i = lineRedGroup.children.length - 1; i >= 0; i--) { 
-			lineRedGroup.remove(lineRedGroup.children[i]);
-		}
-		scene.remove(lineRedGroup);
-	}
 }
 
 function movement(value, object, delay, duration){

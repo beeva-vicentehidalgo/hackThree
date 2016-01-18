@@ -1,6 +1,7 @@
 //-----------------MATERIAL FOR OBJECTS --------
 
 var material = new THREE.MeshPhongMaterial( { color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide } );
+var material = new THREE.MeshLambertMaterial({ color: 0x0033ff, emissive: 0x000033, specular: 0x111111 });
 var material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
 var material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('images/moon.jpg'),color: 0x888888, emissive: 0x888888, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide } );
 var material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture('images/moon.jpg'),color: 0xFFFFFF, side: THREE.DoubleSide  } );
