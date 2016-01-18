@@ -56,20 +56,6 @@ function init() {
 function buildShape(){
 
 	// COPIA AQUI EL CODIGO DEL OBJETO PARA RENDERIZARLO EN ESCENA
-	var CUBEmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
-
-var xAxis = 1000;
-var yAxis = 1000;
-var zAxis = 1000;
-
-var cubegeometry = new THREE.BoxGeometry( xAxis, yAxis, zAxis );
-var cube = new THREE.Mesh( cubegeometry, CUBEmaterial );
-	cube.castShadow = true;
-	cube.receiveShadow = true;
-	cube.position.set(0,0,0);
-	cube.rotation.set(0,0,0);
-	cube.scale.set(1,1,1);
-scene.add( cube );
 }
 
 function onWindowResize() {
