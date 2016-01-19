@@ -18,6 +18,7 @@ function init() {
 	renderer.shadowMapEnabled = true;
 	renderer.shadowMapType = THREE.PCFSoftShadowMap;
 	renderer.setViewport( 0,0,width, height );
+	renderer.getMaxAnisotropy();
 
 	var container = document.getElementById('container');
 	container.appendChild(renderer.domElement);
