@@ -1,14 +1,16 @@
 //-----------------MATERIAL FOR OBJECTS --------
 
-var material = new THREE.MeshPhongMaterial( { color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, transparent: true, opacity: 1, side: THREE.DoubleSide } );
-var material = new THREE.MeshLambertMaterial({ color: 0x0033ff, emissive: 0x000033, specular: 0x111111, transparent: true, opacity: 1 });
-var material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 1 } );
+var material = new THREE.MeshPhongMaterial( { color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, transparent: true, opacity: 1, side: THREE.DoubleSide } ); //Material con reflejos y sombras
+var material = new THREE.MeshLambertMaterial({ color: 0x0033ff, emissive: 0x000033, specular: 0x111111, transparent: true, opacity: 1 }); //material con sombras
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 1 } ); //material plano
 
+//material con textura y reflejos
 var Texture = THREE.ImageUtils.loadTexture( "images/moon.jpg" );
 	Texture.wrapS = asphaltTexture.wrapT = THREE.RepeatWrapping; 
 	Texture.repeat.set( 12, 2 );	
 var material = new THREE.MeshPhongMaterial( { map: Texture,color: 0x888888, emissive: 0x888888, specular: 0x111111, shininess: 100, metal: true, transparent: true, opacity: 1, side: THREE.DoubleSide } );
 
+//material con textura sin reflejos
 var Texture = THREE.ImageUtils.loadTexture( "images/moon.jpg" );
 	Texture.wrapS = asphaltTexture.wrapT = THREE.RepeatWrapping; 
 	Texture.repeat.set( 12, 2 );
@@ -17,6 +19,7 @@ var material = new THREE.MeshBasicMaterial( { map: Texture,color: 0xFFFFFF, side
 //----------------------------------------------
 //------------MULTIPLE TEXTURE------------------
 
+//texturas o colores diferentes para cada una de las caras
 var material1 = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('images/moon.jpg') } );
 var material2 = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('images/ice.jpg') } );
 var material3 = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('images/paint.jpg') } );
@@ -29,11 +32,11 @@ var materials = [material1, material2, material3, material4, material5, material
 var meshFaceMaterial = new THREE.MeshFaceMaterial( materials );
 
 //----------------------------------------------
-//-------------SKY-------------------------------
+//-------------CIELO-------------------------------
 
 var SKYmaterial  = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture('images/skyHD.jpg'),color: 0xFFFFFF, side: THREE.DoubleSide  } );
 
-var SKYradius = 50000;
+var SKYradius = 50000; //dimensiones del cielo
 var SKYwidthSegments = 32;
 var SKYheigthSegments = 32;
 var SKYangleStart = 0;
@@ -51,17 +54,17 @@ scene.add( sky );
 
 var CUBEmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
 
-var xAxis = 1000;
-var yAxis = 1000;
-var zAxis = 1000;
+var xAxis = 1000;//dimensiones x
+var yAxis = 1000;//dimensiones y
+var zAxis = 1000;//dimensiones z
 
 var cubegeometry = new THREE.BoxGeometry( xAxis, yAxis, zAxis );
 var cube = new THREE.Mesh( cubegeometry, CUBEmaterial );
-	cube.castShadow = true;
-	cube.receiveShadow = true;
-	cube.position.set(0,0,0);
-	cube.rotation.set(0,0,0);
-	cube.scale.set(1,1,1);
+	cube.castShadow = true; //emitir sombras
+	cube.receiveShadow = true; //recibir sombras
+	cube.position.set(0,0,0); //position del objeto(x,y,z)
+	cube.rotation.set(0,0,0); //rotacion del objeto(x,y,z)
+	cube.scale.set(1,1,1); //escala del objeto(x,y,z)
 scene.add( cube );
 
 //-----------------------------------------------	
@@ -69,18 +72,18 @@ scene.add( cube );
 
 var CIRCLEmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
 
-var circleradius = 5;
-var circlesegments = 32;
-var circleStartAngle = 0;
-var circleAngle = 6.3;
+var circleradius = 5; //radio del circulo
+var circlesegments = 32;	//numero de segmentos que forman el circulo
+var circleStartAngle = 0;	//angulo desde el que comienza a dibujarse el circulo
+var circleAngle = 6.3; // angulo del circulo(360, solo 180..)
 
 var circleGeometry = new THREE.CircleGeometry( circleradius, circlesegments, circleStartAngle, circleAngle );
 var circle = new THREE.Mesh( circleGeometry, CIRCLEmaterial );
-	circle.castShadow = true;
-	circle.receiveShadow = true;
-	circle.position.set(0,0,0);
-	circle.rotation.set(0,0,0);
-	circle.scale.set(1,1,1);
+	circle.castShadow = true; //emitir sombras
+	circle.receiveShadow = true;	//recibir sombras
+	circle.position.set(0,0,0);	//posicion del objeto(x,y,z)
+	circle.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+	circle.scale.set(1,1,1);	//escala del objeto(x,y,z)
 scene.add( circle );
 
 //-----------------------------------------------
@@ -88,19 +91,19 @@ scene.add( circle );
 
 var CIRCUNFERENCEmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
 
-var CIRCUNFERENCEinnerRadius = 100;
-var CIRCUNFERENCEouterRadius = 550;
-var CIRCUNFERENCESegments = 32;
-var CIRCUNFERENCEangleStart = 0;
-var CIRCUNFERENCEangleLenght = 6.3;
+var CIRCUNFERENCEinnerRadius = 100; //radio de la parte interna de la circunferencia
+var CIRCUNFERENCEouterRadius = 550; //radio de la parte externa de la circunferencia, la diferencia entre ambos define el grosor
+var CIRCUNFERENCESegments = 32; //segmentos utilizados para dibujar la circunferencia
+var CIRCUNFERENCEangleStart = 0;	//angulo desde el que comienza a dibujar la circunferencia
+var CIRCUNFERENCEangleLenght = 6.3; //angulos de la circunferencia(360, solo 180...)
 
 var CIRCUNFERENCEgeometry = new THREE.RingGeometry( CIRCUNFERENCEinnerRadius, CIRCUNFERENCEouterRadius, CIRCUNFERENCESegments, 2,CIRCUNFERENCEangleStart, CIRCUNFERENCEangleLenght );
 var circunference = new THREE.Mesh( CIRCUNFERENCEgeometry, CIRCUNFERENCEmaterial );
-	circunference.castShadow = true;
-	circunference.receiveShadow = true;
-	circunference.position.set(0,0,0);
-	circunference.rotation.set(0,0,0);
-	circunference.scale.set(1,1,1);
+	circunference.castShadow = true;	//emitir sombras
+	circunference.receiveShadow = true;	//recibir sombras
+	circunference.position.set(0,0,0);	//position del objeto(x,y,z)
+	circunference.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+	circunference.scale.set(1,1,1);		//escala del objeto(x,y,z)
 scene.add( circunference );
 
 //------------------------------------------------
@@ -108,19 +111,19 @@ scene.add( circunference );
 
 var DONUTmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
 
-var DONUTradius = 100;
-var DONUTtubeWidth = 30;
-var DONUTradialSegments = 16;
-var DONUTtubularSegments = 100;
-var DONUTarcLength = 6.3;
+var DONUTradius = 100; //radio del anillo
+var DONUTtubeWidth = 30;	//ancho del anillo
+var DONUTradialSegments = 16;	//segmentos usados para dibujar el anillo
+var DONUTtubularSegments = 100;	//segmentos utilizados para dibujar el tubo que forma el anillo
+var DONUTarcLength = 6.3;	//grados que abarca el anillo(360, solo 180...)
 
 var DONUTgeometry = new THREE.TorusGeometry(DONUTradius, DONUTtubeWidth, DONUTradialSegments, DONUTtubularSegments, DONUTarcLength );
 var donut = new THREE.Mesh( DONUTgeometry, DONUTmaterial );
-	donut.castShadow = true;
-	donut.receiveShadow = true;
-	donut.position.set(0,0,0);
-	donut.rotation.set(0,0,0);
-	donut.scale.set(1,1,1);
+	donut.castShadow = true;	//emitir sombras
+	donut.receiveShadow = true;	//recibir sombras
+	donut.position.set(0,0,0);	//position del objeto(x,y,z)
+	donut.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+	donut.scale.set(1,1,1);		//escala del objeto(x,y,z)
 scene.add( donut );
 
 //-------------------------------------------------	
@@ -128,22 +131,22 @@ scene.add( donut );
 
 var CYLINDERmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
 
-var CYLINDERradiusTop = 150;
-var CYLINDERradiusBottom = 150;
-var CYLINDERheigth = 700;
-var CYLINDERradioSegments = 32;
-var CYLINDERheigthSegments = 1;
-var CYLINDERopenEnded = false;
-var circleStartCylinder = 0;
-var circleCylinder = 6.3;
+var CYLINDERradiusTop = 150; //radio de la parte superios del cilindro
+var CYLINDERradiusBottom = 150;	//radio de la parte inferior del cilindro
+var CYLINDERheigth = 700;	//altura del cilindro
+var CYLINDERradioSegments = 32; //segmentos utilizados para dibujar el cilindro(cuantos mas segmentos mas redondo)
+var CYLINDERheigthSegments = 1;	//segmentos necesarios para dibutar la altura del cilindro
+var CYLINDERopenEnded = false;	//en off el cilindro en hueco
+var circleStartCylinder = 0; //grado desde el que empieza a dibujar la pared del cilindro
+var circleCylinder = 6.3; //grados que abarca el cilindro (360, solo 180...)
 
 var CYLINDERgeometry = new THREE.CylinderGeometry( CYLINDERradiusTop, CYLINDERradiusBottom, CYLINDERheigth, CYLINDERradioSegments, CYLINDERheigthSegments, CYLINDERopenEnded, circleStartCylinder, circleCylinder );
 var cylinder = new THREE.Mesh( CYLINDERgeometry, CYLINDERmaterial );
-	cylinder.castShadow = true;
-	cylinder.receiveShadow = true;
-	cylinder.position.set(0,0,0);
-	cylinder.rotation.set(0,0,0);
-	cylinder.scale.set(1,1,1);
+	cylinder.castShadow = true;	//emitir sombras
+	cylinder.receiveShadow = true;	//recibir sombras
+	cylinder.position.set(0,0,0);	//position del objeto(x,y,z)
+	cylinder.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+	cylinder.scale.set(1,1,1);		//escala del objeto(x,y,z)
 scene.add( cylinder );
 
 //-----------------------------------------------
@@ -153,11 +156,11 @@ var PLANEmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x0
 
 var PLANEgeometry = new THREE.PlaneGeometry( 1000, 1000, 1400 );
 var plane = new THREE.Mesh( PLANEgeometry, PLANEmaterial );
-	plane.castShadow = true;
-	plane.receiveShadow = true;
-	plane.position.set(0,0,0);
-	plane.rotation.set(0,0,0);
-	plane.scale.set(1,1,1);
+	plane.castShadow = true;	//emitir sombras
+	plane.receiveShadow = true;	//recibir sombras
+	plane.position.set(0,0,0);	//position del objeto(x,y,z)
+	plane.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+	plane.scale.set(1,1,1);		//escala del objeto(x,y,z)
 scene.add( plane );
 
 //-----------------------------------------------
@@ -165,20 +168,20 @@ scene.add( plane );
 
 var SPHEREmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
 
-var SPHEREradius = 500;
-var SPHEREwidthSegments = 32;
-var SPHEREheigthSegments = 32;
-var SPHEREangleStart = 0;
-var SPHEREangleLenght = 6.3;
+var SPHEREradius = 500; //dimensiones de la esfera
+var SPHEREwidthSegments = 32;	//segmentos usados para dibujar la esfera, cuantos mas segmentos mas redonda pero mas pesada de dibujar
+var SPHEREheigthSegments = 32;	////segmentos usados para dibujar la esfera, cuantos mas segmentos mas redonda pero mas pesada de dibujar
+var SPHEREangleStart = 0; //grado desde el que empieza a dibujar la pared de la espera
+var SPHEREangleLenght = 6.3; //grados que abarca la esfera (360, solo 180...)
 
 var SPHEREgeometry = new THREE.SphereGeometry( SPHEREradius, SPHEREwidthSegments, SPHEREheigthSegments, SPHEREangleStart, SPHEREangleLenght );
 var sphere = new THREE.Mesh( SPHEREgeometry, SPHEREmaterial );
-	sphere.castShadow = true;
-	sphere.receiveShadow = true;
-	sphere.position.set(0,0,0);
-	sphere.rotation.set(0,0,0);
-	sphere.scale.set(1,1,1);
-scene.add( sphere );
+	sphere.castShadow = true;	//emitir sombras
+	sphere.receiveShadow = true;	//recibir sombras
+	sphere.position.set(0,0,0);	//position del objeto(x,y,z)
+	sphere.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+	sphere.scale.set(1,1,1);	//escala del objeto(x,y,z)
+scene.add( sphere );	
 
 //-----------------------------------------------
 //----------curve lines--------------------------------
@@ -186,19 +189,18 @@ scene.add( sphere );
 var numPoints = 200;
 
 var spline = new THREE.SplineCurve3([
-			   new THREE.Vector3(firstPoint.x ,firstPoint.y ,2 ),
-			   new THREE.Vector3(((firstPoint.x+endPoint.x)/2), (firstPoint.y+endPoint.y)/2, 30 ),
-			   new THREE.Vector3(endPoint.x ,endPoint.y ,2 )
+			   new THREE.Vector3(firstPoint.x ,firstPoint.y ,2 ), //punto de inicio de la curva
+			   new THREE.Vector3(((firstPoint.x+endPoint.x)/2), (firstPoint.y+endPoint.y)/2, 30 ), //punto medio de la curva
+			   new THREE.Vector3(endPoint.x ,endPoint.y ,2 ) //punto final de la curva
 		]);
 
-var geometry3 = new THREE.Geometry();
+var geometryspline = new THREE.Geometry();
 
-var material3 = new THREE.LineBasicMaterial({
+var materialspline = new THREE.LineBasicMaterial({
 	    color: 0xff5500,
 	    transparent:true,
 		opacity: 0.8,
-	    //linewidth: Math.floor((Math.random() * 30) + 1)*10*e,
-        linewidth: 1,
+        linewidth: 1, //ancho de la linea
 		sizeAttenuation: false,
 		visible: true
 	});
@@ -206,10 +208,12 @@ var material3 = new THREE.LineBasicMaterial({
 var splinePoints = spline.getPoints(numPoints);
 
 for(var o = 0; o < splinePoints.length; o++){
-	    geometry3.vertices.push(splinePoints[o]);  
+	    geometryspline.vertices.push(splinePoints[o]);  
 	}	
 
-var line2 = new THREE.Line(geometry3, material3);
+var linespline = new THREE.Line(geometryspline, materialspline);
+
+scene.add(linespline)
 
 //------------------------------------------------
 //----------line----------------------------------
@@ -220,8 +224,8 @@ var lineMaterial = new THREE.LineBasicMaterial({
 
 var lineGeometry = new THREE.Geometry();
 	lineGeometry.vertices.push(
-		new THREE.Vector3( -1000, 0, 0 ),
-		new THREE.Vector3( 0, 1000, 0 )
+		new THREE.Vector3( -1000, 0, 0 ), //punto inicial de la linea
+		new THREE.Vector3( 0, 1000, 0 ) //punto final de la linea
 	);
 
 var line = new THREE.Line( lineGeometry, lineMaterial );
