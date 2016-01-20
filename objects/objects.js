@@ -1,18 +1,18 @@
 //-----------------MATERIAL FOR OBJECTS --------
 
-var material = new THREE.MeshPhongMaterial( { color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide } );
-var material = new THREE.MeshLambertMaterial({ color: 0x0033ff, emissive: 0x000033, specular: 0x111111 });
-var material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+var material = new THREE.MeshPhongMaterial( { color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, transparent: true, opacity: 1, side: THREE.DoubleSide } );
+var material = new THREE.MeshLambertMaterial({ color: 0x0033ff, emissive: 0x000033, specular: 0x111111, transparent: true, opacity: 1 });
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 1 } );
 
 var Texture = THREE.ImageUtils.loadTexture( "images/moon.jpg" );
 	Texture.wrapS = asphaltTexture.wrapT = THREE.RepeatWrapping; 
 	Texture.repeat.set( 12, 2 );	
-var material = new THREE.MeshPhongMaterial( { map: Texture,color: 0x888888, emissive: 0x888888, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide } );
+var material = new THREE.MeshPhongMaterial( { map: Texture,color: 0x888888, emissive: 0x888888, specular: 0x111111, shininess: 100, metal: true, transparent: true, opacity: 1, side: THREE.DoubleSide } );
 
 var Texture = THREE.ImageUtils.loadTexture( "images/moon.jpg" );
 	Texture.wrapS = asphaltTexture.wrapT = THREE.RepeatWrapping; 
 	Texture.repeat.set( 12, 2 );
-var material = new THREE.MeshBasicMaterial( { map: Texture,color: 0xFFFFFF, side: THREE.DoubleSide  } );
+var material = new THREE.MeshBasicMaterial( { map: Texture,color: 0xFFFFFF, side: THREE.DoubleSide, transparent: true, opacity: 1  } );
 
 //----------------------------------------------
 //------------MULTIPLE TEXTURE------------------
@@ -179,5 +179,52 @@ var sphere = new THREE.Mesh( SPHEREgeometry, SPHEREmaterial );
 	sphere.rotation.set(0,0,0);
 	sphere.scale.set(1,1,1);
 scene.add( sphere );
+
+//-----------------------------------------------
+//----------curve lines--------------------------------
+
+var numPoints = 200;
+
+var spline = new THREE.SplineCurve3([
+			   new THREE.Vector3(firstPoint.x ,firstPoint.y ,2 ),
+			   new THREE.Vector3(((firstPoint.x+endPoint.x)/2), (firstPoint.y+endPoint.y)/2, 30 ),
+			   new THREE.Vector3(endPoint.x ,endPoint.y ,2 )
+		]);
+
+var geometry3 = new THREE.Geometry();
+
+var material3 = new THREE.LineBasicMaterial({
+	    color: 0xff5500,
+	    transparent:true,
+		opacity: 0.8,
+	    //linewidth: Math.floor((Math.random() * 30) + 1)*10*e,
+        linewidth: 1,
+		sizeAttenuation: false,
+		visible: true
+	});
+
+var splinePoints = spline.getPoints(numPoints);
+
+for(var o = 0; o < splinePoints.length; o++){
+	    geometry3.vertices.push(splinePoints[o]);  
+	}	
+
+var line2 = new THREE.Line(geometry3, material3);
+
+//------------------------------------------------
+//----------line----------------------------------
+
+var lineMaterial = new THREE.LineBasicMaterial({
+	color: 0x0000ff
+});
+
+var lineGeometry = new THREE.Geometry();
+	lineGeometry.vertices.push(
+		new THREE.Vector3( -1000, 0, 0 ),
+		new THREE.Vector3( 0, 1000, 0 )
+	);
+
+var line = new THREE.Line( lineGeometry, lineMaterial );
+scene.add( line );
 
 //-----------------------------------------------

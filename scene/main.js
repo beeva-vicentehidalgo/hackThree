@@ -55,8 +55,8 @@ function init() {
 
 
 function buildShape(){
-
 	// COPIA AQUI EL CODIGO DEL OBJETO PARA RENDERIZARLO EN ESCENA
+
 }
 
 function onWindowResize() {
