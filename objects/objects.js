@@ -119,13 +119,17 @@ scene.add( cylinder );
 //-----------------------------------------------
 //-----------------PLANE-------------------------
 
+var planexAxis = 300;//dimensiones x
+var planeyAxis = 300;//dimensiones y
+var planezAxis = 300;//dimensiones z
+
 var PLANEmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
 
-var PLANEgeometry = new THREE.PlaneGeometry( 1000, 1000, 1400 );
+var PLANEgeometry = new THREE.PlaneGeometry( planexAxis, planeyAxis, planezAxis );
 var plane = new THREE.Mesh( PLANEgeometry, PLANEmaterial );
 	plane.castShadow = true;	//emitir sombras
 	plane.receiveShadow = true;	//recibir sombras
-	plane.position.set(0,0,0);	//position del objeto(x,y,z)
+	plane.position.set(-1400,-1000,0);	//position del objeto(x,y,z)
 	plane.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
 	plane.scale.set(1,1,1);		//escala del objeto(x,y,z)
 scene.add( plane );
@@ -156,9 +160,9 @@ scene.add( sphere );
 var numPoints = 200;
 
 var spline = new THREE.SplineCurve3([
-			   new THREE.Vector3(firstPoint.x ,firstPoint.y ,2 ), //punto de inicio de la curva
-			   new THREE.Vector3(((firstPoint.x+endPoint.x)/2), (firstPoint.y+endPoint.y)/2, 30 ), //punto medio de la curva
-			   new THREE.Vector3(endPoint.x ,endPoint.y ,2 ) //punto final de la curva
+			   new THREE.Vector3(0 ,200 ,0 ), //punto de inicio de la curva
+			   new THREE.Vector3(200,100,0 ), //punto medio de la curva
+			   new THREE.Vector3(400,200,0) //punto final de la curva
 		]);
 
 var geometryspline = new THREE.Geometry();
@@ -186,13 +190,18 @@ scene.add(linespline)
 //----------line----------------------------------
 
 var lineMaterial = new THREE.LineBasicMaterial({
-	color: 0x0000ff
-});
+			color: 0x0000ff,
+		    transparent:true,
+			opacity: 1,
+		    linewidth: 2, //ancho de la linea
+			sizeAttenuation: false,
+			visible: true
+		});
 
 var lineGeometry = new THREE.Geometry();
 	lineGeometry.vertices.push(
-		new THREE.Vector3( -1000, 0, 0 ), //punto inicial de la linea
-		new THREE.Vector3( 0, 1000, 0 ) //punto final de la linea
+		new THREE.Vector3( 0, -1200, 0 ), //punto inicial de la linea
+		new THREE.Vector3( 1000, -700, 0 ) //punto final de la linea
 	);
 
 var line = new THREE.Line( lineGeometry, lineMaterial );
