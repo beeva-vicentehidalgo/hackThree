@@ -18,3 +18,33 @@ html,body {
     -o-transition: all  ease-out 1.5s;
     transition: all ease-out 1.5s;
 }
+
+.buttons {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 330px;
+    height: 50px;
+}
+.selectButton{
+    width: 95px;
+    float: left;
+    border: solid 1px grey;
+    margin-right: 10px; 
+    color: grey;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+.selectButton:hover{
+    background-color: white;
+    color: black;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}

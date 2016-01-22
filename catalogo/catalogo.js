@@ -5,6 +5,8 @@ var camera, scene, renderer, mesh, mouse, controls,
 
 var clock = new THREE.Clock();
 var mouse = new THREE.Vector2();
+
+var current = new THREE.Object3D();
 	
 init();
 animate();
@@ -34,7 +36,7 @@ function init() {
 	controls.enableZoom = true;
 	controls.target.set( 0,0,0 );
 
-	buildShape();
+	buildObjects();
 
 	var directionalLight = new THREE.SpotLight(0xeeeeee, 1.5);
 		directionalLight.position.set(2000, 3500,2500);
@@ -53,8 +55,82 @@ function init() {
 
 }
 
+function buildMaterials(){
 
-function buildShape(){
+		var letters = [
+				{'text': 'Basic', 'x': -1800, 'y': 300,'z': 0},
+				{'text': 'Lambert', 'x': -800, 'y': 300,'z': 0},
+				{'text': 'Phong', 'x': 200, 'y': 300,'z': 0}
+			]
+
+		for(var o = 0; o<letters.length; o++){
+			var spritey = makeTextSprite( letters[o].text, 
+				{ 
+					fontsize: 40, 
+					borderColor: {r:255, g:0, b:0, a:0}, 
+					backgroundColor: {r:255, g:255, b:255, a:0}, 
+					color: '#ffffff',
+					scale: { x: 600, y: 500 } 
+				});
+			spritey.position.set(letters[o].x,letters[o].y,letters[o].z);
+			current.add( spritey );			
+		}
+
+		//-----------------------------------------------
+		// ----------------CUBE-------------------------
+
+		var DONUTmaterial = new THREE.MeshBasicMaterial( {color: 0x0033ff, transparent: true, opacity: 1, side: THREE.DoubleSide} );
+
+		var DONUTradius = 250; //radio del anillo
+		var DONUTtubeWidth = 60;	//ancho del anillo
+		var DONUTradialSegments = 16;	//segmentos usados para dibujar el anillo
+		var DONUTtubularSegments = 100;	//segmentos utilizados para dibujar el tubo que forma el anillo
+		var DONUTarcLength = 6.3;	//grados que abarca el anillo(360, solo 180...)
+
+		var DONUTgeometry = new THREE.TorusGeometry(DONUTradius, DONUTtubeWidth, DONUTradialSegments, DONUTtubularSegments, DONUTarcLength );
+		var donut = new THREE.Mesh( DONUTgeometry, DONUTmaterial );
+			donut.position.set(-2000,0,0);	//position del objeto(x,y,z)
+			donut.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+			donut.scale.set(1,1,1);		//escala del objeto(x,y,z)
+		current.add( donut );
+
+		var DONUTmaterial = new THREE.MeshLambertMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, transparent: true, opacity: 1, side: THREE.DoubleSide} );
+
+		var DONUTradius = 250; //radio del anillo
+		var DONUTtubeWidth = 60;	//ancho del anillo
+		var DONUTradialSegments = 16;	//segmentos usados para dibujar el anillo
+		var DONUTtubularSegments = 100;	//segmentos utilizados para dibujar el tubo que forma el anillo
+		var DONUTarcLength = 6.3;	//grados que abarca el anillo(360, solo 180...)
+
+		var DONUTgeometry = new THREE.TorusGeometry(DONUTradius, DONUTtubeWidth, DONUTradialSegments, DONUTtubularSegments, DONUTarcLength );
+		var donut = new THREE.Mesh( DONUTgeometry, DONUTmaterial );
+			donut.position.set(-1000,0,0);	//position del objeto(x,y,z)
+			donut.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+			donut.scale.set(1,1,1);		//escala del objeto(x,y,z)
+		current.add( donut );
+
+		var DONUTmaterial = new THREE.MeshPhongMaterial( {color: 0x0033ff, emissive: 0x000033, specular: 0x111111, shininess: 100, metal: true, side: THREE.DoubleSide} );
+
+		var DONUTradius = 250; //radio del anillo
+		var DONUTtubeWidth = 60;	//ancho del anillo
+		var DONUTradialSegments = 16;	//segmentos usados para dibujar el anillo
+		var DONUTtubularSegments = 100;	//segmentos utilizados para dibujar el tubo que forma el anillo
+		var DONUTarcLength = 6.3;	//grados que abarca el anillo(360, solo 180...)
+
+		var DONUTgeometry = new THREE.TorusGeometry(DONUTradius, DONUTtubeWidth, DONUTradialSegments, DONUTtubularSegments, DONUTarcLength );
+		var donut = new THREE.Mesh( DONUTgeometry, DONUTmaterial );
+			donut.position.set(0,0,0);	//position del objeto(x,y,z)
+			donut.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
+			donut.scale.set(1,1,1);		//escala del objeto(x,y,z)
+		current.add( donut );
+
+		current.name = 'materialGroup';
+		scene.add(current);
+
+}
+
+
+function buildObjects(){
 		var letters = [
 				{'text': 'Cube', 'x': -1800, 'y': 300,'z': 0},
 				{'text': 'Circle', 'x': -1300, 'y': 300,'z': 0},
@@ -77,7 +153,7 @@ function buildShape(){
 					scale: { x: 600, y: 500 } 
 				});
 			spritey.position.set(letters[o].x,letters[o].y,letters[o].z);
-			scene.add( spritey );			
+			current.add( spritey );			
 		}
 
 		//-----------------------------------------------
@@ -96,7 +172,7 @@ function buildShape(){
 			cube.position.set(-2000,0,0); //position del objeto(x,y,z)
 			cube.rotation.set(0,0,0); //rotacion del objeto(x,y,z)
 			cube.scale.set(1,1,1); //escala del objeto(x,y,z)
-		scene.add( cube );
+		current.add( cube );
 
 		//-----------------------------------------------	
 		//-------------CIRCLE----------------------------
@@ -115,7 +191,7 @@ function buildShape(){
 			circle.position.set(-1400,0,0);	//posicion del objeto(x,y,z)
 			circle.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
 			circle.scale.set(1,1,1);	//escala del objeto(x,y,z)
-		scene.add( circle );
+		current.add( circle );
 
 		//-----------------------------------------------
 		//----------------CIRCUNFERENCE------------------
@@ -135,7 +211,7 @@ function buildShape(){
 			circunference.position.set(-700,0,0);	//position del objeto(x,y,z)
 			circunference.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
 			circunference.scale.set(1,1,1);		//escala del objeto(x,y,z)
-		scene.add( circunference );
+		current.add( circunference );
 
 		//------------------------------------------------
 		//--------------DONUT 3D--------------------------
@@ -155,7 +231,7 @@ function buildShape(){
 			donut.position.set(-0,0,0);	//position del objeto(x,y,z)
 			donut.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
 			donut.scale.set(1,1,1);		//escala del objeto(x,y,z)
-		scene.add( donut );
+		current.add( donut );
 
 		//-------------------------------------------------	
 		//--------------CYLINDER---------------------------
@@ -178,7 +254,7 @@ function buildShape(){
 			cylinder.position.set(-2000,-1000,0);	//position del objeto(x,y,z)
 			cylinder.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
 			cylinder.scale.set(1,1,1);		//escala del objeto(x,y,z)
-		scene.add( cylinder );
+		current.add( cylinder );
 
 		//-----------------------------------------------
 		//-----------------PLANE-------------------------
@@ -197,7 +273,7 @@ function buildShape(){
 			plane.position.set(-1400,-1000,0);	//position del objeto(x,y,z)
 			plane.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
 			plane.scale.set(1,1,1);		//escala del objeto(x,y,z)
-		scene.add( plane );
+		current.add( plane );
 
 		//-----------------------------------------------
 		//---------------SPHERE--------------------------
@@ -217,7 +293,7 @@ function buildShape(){
 			sphere.position.set(-700,-1000,0);	//position del objeto(x,y,z)
 			sphere.rotation.set(0,0,0);	//rotacion del objeto(x,y,z)
 			sphere.scale.set(1,1,1);	//escala del objeto(x,y,z)
-		scene.add( sphere );	
+		current.add( sphere );	
 
 		//-----------------------------------------------
 		//----------curve lines--------------------------------
@@ -249,7 +325,7 @@ function buildShape(){
 
 		var linespline = new THREE.Line(geometryspline, materialspline);
 
-		scene.add(linespline)
+		current.add(linespline)
 
 		//------------------------------------------------
 		//----------line----------------------------------
@@ -270,9 +346,11 @@ function buildShape(){
 			);
 
 		var line = new THREE.Line( lineGeometry, lineMaterial );
-		scene.add( line );
+		current.add( line );
 
 		//-----------------------------------------------
+		current.name = 'muestrasGroup';
+		scene.add(current)
 
 }
 
@@ -391,6 +469,25 @@ function movement(value, object, delay, duration){
           	camera.position.z = valueZ;*/
           }).delay(delay).start();
 }
+
+function removeObject(){
+	if(current.children.length > 0){
+		for( var i = current.children.length - 1; i >= 0; i--) { 
+			current.remove(current.children[i]);
+		}
+		scene.remove(current);
+	}
+}
+
+$('#objects').click(function(){
+	removeObject();
+	buildObjects();
+
+})
+$('#materials').click(function(){
+	removeObject();
+	buildMaterials();
+})
 
 function animate() {
 
